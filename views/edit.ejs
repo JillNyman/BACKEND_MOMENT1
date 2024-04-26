@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ändra kurs</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <main>
+            <h1>Ändra kursinformation</h1>
+
+    <form method="post">
+        <% if(error !== "" ) { %>
+            <p class="error">
+                <%= error %>
+            </p>
+        <%}%>
+        <label for="coursecode">Kurskod:</label>
+        <br>
+        <input type="text" id="coursecode" name="coursecode" value="<%= row.coursecode %>">
+        <br>
+        <label for="coursename">Kursnamn:</label>
+        <br>
+        <input type="text" id="coursename" name="coursename" value="<%= row.coursename %>">
+        <br>
+        <label for="coursesyllabus">Kursplan:</label>
+        <br>
+        <input type="text" id="coursesyllabus" name="coursesyllabus" value="<%= row.syllabus %>">
+        <br>
+        <label for="courseprogression">Kursnivå:</label>
+        <br>
+        <input type="text" id="courseprogression" name="courseprogression" value="<%= row.progression %>">
+        <br>       
+        <input type="submit" value="Ändra kursinformation">       
+    </form>
+
+    <p id="add-course-link"> <a href="/">Tillbaka till kurserna</a></p> 
+    <p id="add-course-link"> <a href="/addcourse">Lägg till ny kurs</a></p> 
+    
+    
+</main>
+</div>
+</body>
+</html>

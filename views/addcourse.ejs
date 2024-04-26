@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lägg till kurs</title>
+    
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <main>
+    <h1>Lägg till kurs</h1>
+
+    <form method="post">
+       <% if(error !== "" ) { %>
+        <p class="error">
+            <%= error %>
+        </p>
+    <%}%>
+   
+     
+        <label for="coursecode">Kurskod:</label>
+        <br>
+        <input type="text" id="coursecode" name="coursecode">
+        <br>
+        <label for="coursename">Kursnamn:</label>
+        <br>
+        <input type="text" id="coursename" name="coursename">
+        <br>
+        <label for="coursesyllabus">Kursplan:</label>
+        <br>
+        <input type="text" id="coursesyllabus" name="coursesyllabus">
+        <br>
+        <label for="courseprogression">Kursnivå:</label>
+        <br>
+        <input type="text" id="courseprogression" name="courseprogression">
+        <br>       
+        <input type="submit" value="Lägg till">       
+    </form>
+
+    <p id="add-course-link"> <a href="/">Tillbaka till kurslistan</a></p> 
+    
+    </main>
+    </div>  
+    
+</body>
+</html>
