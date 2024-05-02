@@ -10,39 +10,12 @@
     <div class="container" id="course-list-container">
         <main>
     <h1>Kurslista</h1>   
+    <p id="add-course-link"> <a href="/list">Se kurser</a></p> 
     <p id="add-course-link"> <a href="/addcourse">Lägg till ny kurs</a></p> 
-    <p id="add-course-link"> <a href="/about">Om uppgiften</a></p> 
+    <p id="add-course-link"> <a href="/about">Om uppgiften</a></p>    
 
-    
-
-    <table class="course-list">
-        <tr>
-            <th>Kurskod</th>
-            <th>Kursnamn</th>
-            <th>Kursplan</th>
-            <th>Kursprog.</th>
-        </tr>       
-        <% if(locals.rows !== "") { %>
-            <% locals.rows.forEach((row) => { %>
-                    <tr rowspan="2">
-                        <td> <%= row.coursecode %></td>
-                        <td><%= row.coursename %><br><a href="/edit/<%= row.id %>">Ändra</a></td>
-                        <td><%= row.syllabus %><br><a href="/delete/<%= row.id %>">Radera kurs</a></td>
-                        <td><%= row.progression %></td>
-                        
-                       
-                    </tr>      
-            
-    
-        
-   <% }); %>
-<% } %>
-</table>
-<% if(error !== "" ) { %>
-    <p class="error">
-        <%= error %>
-    </p>
-<%}%>
+              
+                
 </main>
 </div>
 </body>

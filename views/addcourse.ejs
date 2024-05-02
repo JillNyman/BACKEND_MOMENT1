@@ -12,7 +12,7 @@
         <main>
     <h1>Lägg till kurs</h1>
 
-    <form method="post">
+    <form method="post" action="/addcourse">
        <% if(error !== "" ) { %>
         <p class="error">
             <%= error %>
@@ -39,7 +39,7 @@
         <input type="submit" value="Lägg till">       
     </form>
 
-    <p id="add-course-link"> <a href="/">Tillbaka till kurslistan</a></p> 
+    <p id="add-course-link"> <a href="/list">Tillbaka till kurslistan</a></p> 
     
     </main>
     </div>  
