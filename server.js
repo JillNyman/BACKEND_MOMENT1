@@ -1,16 +1,41 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require("path");
+const helmet = require('helmet');
 
 const sqlite3 = require("sqlite3").verbose();
-const db = new sqlite3.Database("/courses.db");
 
+
+const db = new sqlite3.Database("./courses.db");
 const app = express();
-const port = 1998;
+const port = 1991;
 
-
+//app.use(helmet());
 app.set('view engine', 'ejs');
-app.use(express.static("public"));
+//app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use(helmet.contentSecurityPolicy({
+    directives: {
+        defaultSrc: ["'none'"],
+        scriptSrc: ["'self'"],
+        styleSrc: ["'self'", `http://localhost:${port}`, "http://*.example.com"]
+    }
+}));
+
 app.use(bodyParser.urlencoded({ extended: true}));
+
+/*app.use('/stylesheets', (req, res, next) => {
+    res.setHeader(
+        'Content-Type', 'text/css');
+    next();
+});*/
+
+app.use((req, res, next) => {
+  res.setHeader(
+    "Content-Security-Policy", 
+    `default-src 'none'; script-src 'self'; style-src 'self' http://localhost:${port} http://*.example.com`);
+  next();
+});
 
 
 //Routing
@@ -86,8 +111,9 @@ app.get("/delete/:id", (req, res) => {
     db.run("DELETE FROM courselist WHERE id=?;", id, (err) => {
         if(err){
             console.error(err.message);
+            return;
         }
-        res.redirect("list");
+        res.redirect("/");
         
     });
 });
@@ -96,6 +122,7 @@ app.get("/delete/:id", (req, res) => {
 app.get("/edit/:id", (req, res) => {
     let id = req.params.id;
 
+    //GET istället för RUN eftersom vi vill ha något tillbaka från databasen
    db.get(`SELECT * FROM courselist WHERE id=?;`, id, (err, row) => {
         if(err){
             console.error(err.message);
@@ -126,13 +153,15 @@ app.post("/edit/:id",  (req, res) => {
    } else {
         error = "Fyll i samtliga fält!";      
    }
-   res.redirect("index");
+   res.render(`/edit/${id}`);
 });
 
 //Starta applikationen
 app.listen(port, () => {
     console.log("Application started on port: " + port);
 });
+
+//db.close();
 
 
 

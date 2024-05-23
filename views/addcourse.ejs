@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lägg till kurs</title>
     
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/public/css/styles.css">
 </head>
 <body>
     <div class="container">
         <main>
     <h1>Lägg till kurs</h1>
 
-    <form method="post" action="/addcourse">
+    <form method="post">
        <% if(error !== "" ) { %>
         <p class="error">
             <%= error %>
@@ -39,7 +39,7 @@
         <input type="submit" value="Lägg till">       
     </form>
 
-    <p id="add-course-link"> <a href="/list">Tillbaka till kurslistan</a></p> 
+    <p id="add-course-link"> <a href="list">Tillbaka till kurslistan</a></p> 
     
     </main>
     </div>  
