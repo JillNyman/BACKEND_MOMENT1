@@ -32,7 +32,7 @@
         <% locals.rows.forEach((row) => { %>
             <tr rowspan="2">
                 <td> <%= row.coursecode %></td>
-                <td><%= row.coursename %><br><a href="/edit/<%= row.id %>">Ändra</a></td>
+                <td><%= row.coursename %></td>
                 <td><%= row.syllabus %><br><a href="delete/<%= row.id %>">Radera kurs</a></td>
                 <td><%= row.progression %></td>                    
                

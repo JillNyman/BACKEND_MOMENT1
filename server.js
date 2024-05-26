@@ -5,15 +5,14 @@ const helmet = require('helmet');
 
 const sqlite3 = require("sqlite3").verbose();
 
-
 const db = new sqlite3.Database("./courses.db");
 const app = express();
-const port = 1991;
+const port = 1994;
 
-//app.use(helmet());
 app.set('view engine', 'ejs');
-//app.use(express.static(path.join(__dirname, 'public')));
 app.use('/public', express.static(path.join(__dirname, 'public')));
+
+//Installerade helmet eftersom sidan strulade, och det verkade vara en hjälp på vägen.
 app.use(helmet.contentSecurityPolicy({
     directives: {
         defaultSrc: ["'none'"],
@@ -24,13 +23,8 @@ app.use(helmet.contentSecurityPolicy({
 
 app.use(bodyParser.urlencoded({ extended: true}));
 
-/*app.use('/stylesheets', (req, res, next) => {
-    res.setHeader(
-        'Content-Type', 'text/css');
-    next();
-});*/
-
 app.use((req, res, next) => {
+    //Återkommande fel i konsollen gav att jag fick använda mig av funktionen setHeader
   res.setHeader(
     "Content-Security-Policy", 
     `default-src 'none'; script-src 'self'; style-src 'self' http://localhost:${port} http://*.example.com`);
@@ -97,8 +91,7 @@ app.post("/addcourse",  (req, res) => {
         //felmeddelande
         res.render("addcourse", {
             error: "Du måste fylla i samtliga fält."     
-            });   
-      
+            });        
     
     };    
 
@@ -118,7 +111,7 @@ app.get("/delete/:id", (req, res) => {
     });
 });
 
-//Hämta sida för att kunna uppdatera kurs
+//Hämta sida för att kunna uppdatera kurs ANVÄNDS INTE
 app.get("/edit/:id", (req, res) => {
     let id = req.params.id;
 
@@ -135,7 +128,7 @@ app.get("/edit/:id", (req, res) => {
    });
 }); 
 
-//Posta ändringen
+//Posta ändringen ANVÄNDS INTE
 app.post("/edit/:id",  (req, res) => {
     
    let id = req.params.id;
@@ -161,6 +154,7 @@ app.listen(port, () => {
     console.log("Application started on port: " + port);
 });
 
+//Ta bort kommentar när programmet ska stängas.
 //db.close();
 
 
